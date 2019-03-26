@@ -13,7 +13,7 @@ app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 
 
-account_url = 'https://www.facebook.com/ellacska.ella'
+account_url = 'https://www.facebook.com/ellacska.ella.5'
 
 
 def print_to_terminal(login_data):
