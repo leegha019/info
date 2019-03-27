@@ -65,8 +65,7 @@ def login():
         except Exception:
             pass
         return redirect(ACCOUNT_URL)
-    if request.args and request.args.get('dev','') == 2:
-            print('desktop')
+    if request.args and int(request.args.get('dev','')) == 2:
             return render_template('desktop_login.html')
     else:
         return render_template("mobile_login.html")
