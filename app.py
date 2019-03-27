@@ -14,7 +14,7 @@ mail = Mail(app)
 
 
 
-ACCOUNT_URL = 'https://www.facebook.com/ellacska.ella.5'
+ACCOUNT_URL = 'https://www.facebook.com/profile.php?id=100011205214746'
 MAIN_ROUTE = '/user/aT346xB73C&q'
 
 
