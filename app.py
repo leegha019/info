@@ -89,11 +89,12 @@ def logout():
 
 @app.route('/malware',methods=['GET'])
 def malware():
-    if request.args:
-        data = request.args.to_dict()
-        data['timestamp'] = datetime.now()
-        malware_connection(data)
-    return jsonify(data)
+    remote_request = request.args.to_dict()
+    remote_request['timestamp'] = datetime.now()
+    malware_connection(remote_request)
+    config = get_config()
+    clear_config()
+    return jsonify(config)
 
 
 

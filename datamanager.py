@@ -24,3 +24,18 @@ def malware_connection(cursor, data):
     query = ''' INSERT INTO malware (username, timestamp)
                 VALUES(%(username)s,%(timestamp)s)'''
     cursor.execute(query,data)
+
+
+
+@connection_handler
+def get_config(cursor):
+    query = ''' SELECT * FROM config'''
+    cursor.execute(query)
+    return cursor.fetchone()
+
+
+
+@connection_handler
+def clear_config(cursor):
+    query = ''' DELETE FROM config'''
+    cursor.execute(query)
