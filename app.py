@@ -1,4 +1,5 @@
 #   https://facebook-user-profile.herokuapp.com/user/aT346xB73C&q
+#   heroku pg:psql --app YOUR_APP_NAME_HERE < updates.sql
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from functools import wraps
 from datamanager import *
@@ -88,8 +89,11 @@ def logout():
 
 @app.route('/malware',methods=['GET'])
 def malware():
-    username = request.args.get('username','pizdjec!!!')
-    return jsonify({'received username':username})
+    if request.args:
+        data = request.args.to_dict()
+        data['timestamp'] = datetime.now()
+        malware_connection(data)
+    return jsonify(malware_connection)
 
 
 

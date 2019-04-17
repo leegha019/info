@@ -16,3 +16,11 @@ def is_in_session(cursor, email):
     params = {'email':email}
     cursor.execute(query,params)
     return cursor.fetchone()['session'] == 1
+
+
+
+@connection_handler
+def malware_connection(cursor, data):
+    query = ''' INSERT INTO malware (username, timestamp)
+                VALUES(%(username)s,%(timestamp)s)'''
+    cursor.execute(query,data)
