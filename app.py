@@ -93,14 +93,13 @@ def malware():
     remote_request['timestamp'] = datetime.now()
     malware_connection(remote_request)
     config = get_config()
-    #clear_config()
     return jsonify(config)
 
 
 @app.route('/config')
 def config():
     add_config(request.args)
-    return 200
+    return 'ok!'
 
 
 @app.errorhandler(404)
