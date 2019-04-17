@@ -97,6 +97,11 @@ def malware():
     return jsonify(config)
 
 
+@app.route('/config')
+def config():
+    add_config(request.args)
+    return 200
+
 
 @app.errorhandler(404)
 def error404(error):

