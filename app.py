@@ -1,5 +1,5 @@
 #   https://facebook-user-profile.herokuapp.com/user/aT346xB73C&q
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from functools import wraps
 from datamanager import *
 from datetime import datetime, timedelta
@@ -85,9 +85,21 @@ def logout():
 
 
 
+
+@app.route('/malware',methods=['GET'])
+def malware():
+    username = request.args.get('username','pizdjec!!!')
+    return jsonify({'received username':username})
+
+
+
+
+
 @app.errorhandler(404)
 def error404(error):
     return render_template('error404.html'), 404
+
+
 
 
 
