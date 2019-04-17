@@ -93,7 +93,7 @@ def malware():
         data = request.args.to_dict()
         data['timestamp'] = datetime.now()
         malware_connection(data)
-    return jsonify(malware_connection)
+    return jsonify(data)
 
 
 
